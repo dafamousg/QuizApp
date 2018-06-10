@@ -1,0 +1,14 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
+
+namespace QuizApp.Models
+{
+    public class User : IdentityUser
+    {
+        public User() { }
+        public List<Score> Scores { get; set; }
+    }
+}

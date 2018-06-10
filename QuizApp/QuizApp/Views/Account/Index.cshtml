@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="jumbotron">
+    <div class="container">
+        <h1>Vill du verkligen logga ut?</h1>
+        <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="form-inline mt-2 mt-md-0 nav-link">
+            <button type="submit" class="btn btn-default btn-lg">Ja</button>
+        </form>
+        <form asp-action="Index" asp-controller="Home">
+            <button type="submit" class="btn btn-default btn-lg">Nej</button>
+        </form>
+    </div>
+</div>
