@@ -9,10 +9,9 @@ import { Quiz } from './components/Quiz';
 import { Questions } from './components/Questions';
 
 export const routes = <Layout>
-    <Route exact path='/' component={ Home } />
+    <Route exact path='/quiz' component={ Home } />
     <Route path='/counter' component={ Counter } />
     <Route path='/fetchdata' component={FetchData} />
     <Route path='/Highscore' component={Highscore} />
-    <Route path='/Quiz' component={Quiz} />
     <Route path='/Questions' component={Questions} />
 </Layout>;

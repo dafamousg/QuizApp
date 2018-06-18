@@ -5,10 +5,9 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Models
 {
-    public class Question : BaseEntity
+    public class Question
     {
-        public Question() { }
-
+        public int Id { get; set; }
         public string Question_ { get; set; }
         public string OptionA {get;set;}
         public string OptionB {get;set;}
