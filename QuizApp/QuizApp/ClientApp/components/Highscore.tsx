@@ -1,41 +1,73 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
-import { Counter } from './Counter';
+import { Quiz } from './Quiz';
 
-interface IQuizState {
+interface IHighscoreState {
     highScores: HighScore[];
 
 }
 
-interface CounterState {
-    currentCount: number;
-}
 
-export class Highscore extends React.Component<RouteComponentProps<{}>, CounterState>{
 
-    constructor() {
-        super();
-        this.state = { currentCount: 0 };
+export class Highscore extends React.Component<RouteComponentProps<{}>, IHighscoreState>{
+
+    public constructor() {
+        super(); {
+            this.state = { highScores: [] };
+        }
+        this.fetchScores = this.fetchScores.bind(this);
     }
 
     public render() {
-        return <div>
-            <h1>Counter</h1>
 
-            <p>This is a simple example of a React component.</p>
+        let count = 0;
 
-            <p>Current count: <strong>{this.state.currentCount}</strong></p>
+        let oldList = this.state.highScores;
+        let newList = oldList.map((highscore, index) => <li key={highscore + ":" + index}>{highscore.userName}</li>);
 
-            <button onClick={() => { this.incrementCounter() }}>Increment</button>
-        </div>;
+        return <table className="table">
+                <thead>
+                    <tr>
+                        <th>HighScore</th>
+                        <th>Username</th>
+                        <th>Date & Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {oldList.map((highscore, index) =>
+                        <tr key={highscore.userName + ":" + index}>
+                            <td>{highscore.userName}</td>
+                            <td>{highscore._HighScore}</td>
+                            <td>{highscore.dateTime}</td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
     }
 
-    incrementCounter() {
-        this.setState({
-            currentCount: this.state.currentCount + 1
-        });
-    }
 
+    fetchScores() {
+        // fråga API:et efter aktuell data
+
+
+        fetch('/question/GetHighScores')
+            .then(data => {
+                console.log('Question returned ', data);
+                return data.json();
+            })
+            .then(obj => {
+
+                this.setState({
+                    highScores: obj
+                });
+            })
+            .catch(message => {
+                console.log('något gick fel: ' + message);
+            })
+    }
+    componentDidMount() {
+        this.fetchScores();
+    }
 }
 
 

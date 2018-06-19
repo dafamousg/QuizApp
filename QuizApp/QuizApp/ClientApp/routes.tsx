@@ -13,6 +13,6 @@ export const routes = <Layout>
     <Route path='/counter' component={ Counter } />
     <Route path='/fetchdata' component={FetchData} />
     <Route path='/Highscore' component={Highscore} />
-    <Route path='/Quiz' component={Quiz} />
     <Route path='/Questions' component={Questions} />
+    <Route exact path='/Quiz' component={Quiz} />
 </Layout>;
