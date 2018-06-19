@@ -1,7 +1,6 @@
 ﻿import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 
-
 let userName = document.getElementById('react-app')!.textContent;
 interface IQuizProps { }
 interface IQuizState {
@@ -17,15 +16,10 @@ interface IQuizState {
     showAnswer: string;
 }
 
-interface CounterState {
-    currentCount: number;
-}
+export class Quiz extends React.Component<RouteComponentProps<{}>, IQuizState>{
 
-export class Quiz extends React.Component<RouteComponentProps<{}>, CounterState>{
-    
     constructor() {
         super();
-        this.state = { currentCount: 0 };
     }
 
     public render() {
@@ -34,17 +28,14 @@ export class Quiz extends React.Component<RouteComponentProps<{}>, CounterState>
 
             <p>This is a simple example of a React component.</p>
 
-            <p>Current count: <strong>{this.state.currentCount}</strong></p>
-
             <button onClick={() => { this.incrementCounter() }}>Increment</button>
         </div>;
     }
 
     incrementCounter() {
         this.setState({
-            currentCount: this.state.currentCount + 1
         });
-    } 
+    }
 }
 
 
