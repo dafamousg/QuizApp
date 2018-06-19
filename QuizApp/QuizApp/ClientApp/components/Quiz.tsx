@@ -8,7 +8,7 @@ interface IQuizState {
     selectedOption: string;
     isSubmitButtonDisabled: boolean;
     isNextQuestionButtonDisabled: boolean;
-    isOptionDisable: boolean;
+    isOptionDisabled: boolean;
     counter: number;
     score: number;
     startQuiz: boolean;
@@ -21,7 +21,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
     public constructor(props: IQuizProps) {
         super(props); {
             this.state = {
-                questions: [], selectedOption: "", isSubmitButtonDisabled: true, isNextQuestionButtonDisabled: true, isOptionDisable: false, counter: 0, score: 0, startQuiz: false, answerColor: 'orange', showAnswer: ""
+                questions: [], selectedOption: "", isSubmitButtonDisabled: true, isNextQuestionButtonDisabled: true, isOptionDisabled: false, counter: 0, score: 0, startQuiz: false, answerColor: 'orange', showAnswer: ""
             }
         }
 
@@ -45,10 +45,11 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
         else {
 
             let oldList = this.state.questions;
-            let question = oldList.map(x => x.question);
-            let option1 = oldList.map(o => o.option1);
-            let option2 = oldList.map(o => o.option2);
-            let option3 = oldList.map(o => o.option3);
+
+            let question_ = oldList.map(x => x.question_);
+            let optionA = oldList.map(o => o.optionA);
+            let optionB = oldList.map(o => o.optionB);
+            let optionC = oldList.map(o => o.optionC);
 
             let counter = this.state.counter;
 
@@ -60,34 +61,39 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
 
             }
             else {
-                return (<div className="row">
-                    <div className="col-sm-7">
-                        <label className="pull-right" id="points">{this.state.score} of {this.state.questions.length} points</label>
-                        <ol>
-                            <h2>{question[counter]}</h2>
-                            <br />
-                            <label className="container">{option1[counter]}
-                                <input type="radio" name="q1" value={option1[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option1[counter]} disabled={this.state.isOptionDisable} /> < br />
-                                <span className="checkmark"></span>
-                            </label>
-                            <label className="container">{option2[counter]}
-                                <input type="radio" name="q1" value={option2[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option2[counter]} disabled={this.state.isOptionDisable} /><br />
-                                <span className="checkmark"></span>
-                            </label>
-                            <label className="container">{option3[counter]}
-                                <input type="radio" name="q1" style={{ background: 'pink' }} value={option3[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option3[counter]} disabled={this.state.isOptionDisable} /><br />
-                                <span className="checkmark"></span>
-                            </label>
-                            <br />
-                            <input type="button" value="Submit" className="submitBtn" disabled={this.state.isSubmitButtonDisabled} onClick={this.SubmitEvent}></input>
-                            <input type="button" value="Next question" id="nextQuestionButton" className="submitBtn" disabled={this.state.isNextQuestionButtonDisabled} onClick={this.manageNextQuestion}></input>
+                return (
+                    <div className="row">
 
-                        </ol><div id="infoLabel">
-                            <label id="answerBox" style={{ color: this.state.answerColor }}>{this.state.showAnswer} </label><br />
+                        <form>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>A</th>
+                                        <th>B</th>
+                                        <th>C</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{question_[counter]}</td>
+                                        <td><input type="radio" name="q1" value={optionA[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionA[counter]} disabled={this.state.isOptionDisabled} /></td>
+                                        <td><input type="radio" name="q1" value={optionB[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionB[counter]} disabled={this.state.isOptionDisabled} /></td>
+                                        <td><input type="radio" name="q1" value={optionC[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionC[counter]} disabled={this.state.isOptionDisabled} /></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </form>
+                        <hr />
+                        <div>
+                            <input type="button" value="Submit" className="btn btn-default" style={{ marginRight: 10 }} disabled={this.state.isSubmitButtonDisabled} onClick={this.SubmitEvent}></input>
+                            <input type="button" value="Next question" id="nextQuestionButton" className="btn btn-default" disabled={this.state.isNextQuestionButtonDisabled} onClick={this.manageNextQuestion}></input>
 
+                            <label className="pull-right" id="points">{this.state.score} of {this.state.questions.length} correct</label>
+                            <label id="answerBox" style={{ color: this.state.answerColor }}>{this.state.showAnswer} </label>
                         </div>
                     </div>
-                </div>);
+                );
             }
         }
     }
@@ -146,14 +152,14 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
         }
 
         this.setState({ isNextQuestionButtonDisabled: true })
-        this.setState({ isOptionDisable: false })
+        this.setState({ isOptionDisabled: false })
         this.setState({ answerColor: 'orange' })
     }
 
     SubmitEvent(event: any) {
-        let finalSelectedOption = this.state.selectedOption;
+        let lastSelectedOption = this.state.selectedOption;
 
-        let correctAnswers = this.state.questions.filter(x => x.correctAnswer == finalSelectedOption);
+        let correctAnswers = this.state.questions.filter(x => x.correctAnswer == lastSelectedOption);
 
         if (correctAnswers.length > 0) {
             console.log('You got one point!');
@@ -171,18 +177,18 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
             this.setState({ showAnswer: 'Your was wrong.' })
         }
 
-        console.log(finalSelectedOption);
+        console.log(lastSelectedOption);
 
         this.setState({ isSubmitButtonDisabled: true })
         this.setState({ isNextQuestionButtonDisabled: false })
-        this.setState({ isOptionDisable: true })
+        this.setState({ isOptionDisabled: true })
     }
 }
 
 interface Quest {
-    question: string;
+    question_: string;
     correctAnswer: string;
-    option1: string;
-    option2: string;
-    option3: string;
+    optionA: string;
+    optionB: string;
+    optionC: string;
 }
