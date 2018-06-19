@@ -26,6 +26,10 @@
     }
 }
 
+quiz-width{
+    width:500px;
+}
+
 @media (min-width: 768px) {
     /* On small screens, convert the nav menu to a vertical sidebar */
     .main-nav {

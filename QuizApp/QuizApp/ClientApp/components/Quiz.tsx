@@ -16,31 +16,80 @@ interface IQuizState {
     showAnswer: string;
 }
 
-export class Quiz extends React.Component<RouteComponentProps<IQuizProps>, IQuizState>{
+export class Quiz extends React.Component<IQuizProps, IQuizState>{
 
-    constructor(props: IQuizProps) {
+    public constructor(props: IQuizProps) {
         super(props); {
             this.state = {
                 questions: [], selectedOption: "", isSubmitButtonDisabled: true, isNextQuestionButtonDisabled: true, isOptionDisable: false, counter: 0, score: 0, startQuiz: false, answerColor: 'orange', showAnswer: ""
-
             }
         }
+
         this.getQuestion = this.getQuestion.bind(this);
         this.SubmitEvent = this.SubmitEvent.bind(this);
         this.manageNextQuestion = this.manageNextQuestion.bind(this);
         this.sendScore = this.sendScore.bind(this);
         this.startQuiz = this.startQuiz.bind(this);
         this.restartQuiz = this.restartQuiz.bind(this);
-
     }
 
     public render() {
-        return <div>
-            <h1>Counter</h1>
 
-            <p>This is a simple example of a React component.</p>
+        if (this.state.startQuiz == false) {
+            return <div className="text-center">
+                <h1>Welcome {userName}!</h1>
+                <h1>Press start to begin the game!</h1>
+                <button id="startQuizButton" className="btn btn-danger" onClick={this.startQuiz}>Start</button>
+            </div>
+        }
+        else {
 
-        </div>;
+            let oldList = this.state.questions;
+            let question = oldList.map(x => x.question);
+            let option1 = oldList.map(o => o.option1);
+            let option2 = oldList.map(o => o.option2);
+            let option3 = oldList.map(o => o.option3);
+
+            let counter = this.state.counter;
+
+            if (this.state.questions.length == counter) {
+
+                let maximumScore = this.state.questions.length;
+                this.sendScore();
+                return < div className="text-center"><h1>You got {this.state.score} of {this.state.questions.length} points. Do you want to play again?</h1><button id="startQuizButton" className="submitBtn" onClick={this.restartQuiz}>Start</button></div>
+
+            }
+            else {
+                return (<div className="row">
+                    <div className="col-sm-7">
+                        <label className="pull-right" id="points">{this.state.score} of {this.state.questions.length} points</label>
+                        <ol>
+                            <h2>{question[counter]}</h2>
+                            <br />
+                            <label className="container">{option1[counter]}
+                                <input type="radio" name="q1" value={option1[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option1[counter]} disabled={this.state.isOptionDisable} /> < br />
+                                <span className="checkmark"></span>
+                            </label>
+                            <label className="container">{option2[counter]}
+                                <input type="radio" name="q1" value={option2[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option2[counter]} disabled={this.state.isOptionDisable} /><br />
+                                <span className="checkmark"></span>
+                            </label>
+                            <label className="container">{option3[counter]}
+                                <input type="radio" name="q1" style={{ background: 'pink' }} value={option3[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option3[counter]} disabled={this.state.isOptionDisable} /><br />
+                                <span className="checkmark"></span>
+                            </label>
+                            <br />
+                            <input type="button" value="Submit" className="submitBtn" disabled={this.state.isSubmitButtonDisabled} onClick={this.SubmitEvent}></input>
+                            <input type="button" value="Next question" id="nextQuestionButton" className="submitBtn" disabled={this.state.isNextQuestionButtonDisabled} onClick={this.manageNextQuestion}></input>
+
+                        </ol><div id="infoLabel">
+                            <label id="answerBox" style={{ color: this.state.answerColor }}>{this.state.showAnswer} </label><br />
+
+                        </div>
+                    </div>
+                </div>);
+            }
+        }
     }
 
     changeEvent(event: any) {
@@ -59,7 +108,7 @@ export class Quiz extends React.Component<RouteComponentProps<IQuizProps>, IQuiz
     }
 
     startQuiz(event: any) {
-        this.setState({ startQuiz: true; })
+        this.setState({ startQuiz: true })
         console.log(this.state.startQuiz)
     }
 
