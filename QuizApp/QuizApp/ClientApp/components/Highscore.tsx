@@ -23,7 +23,7 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
         let count = 0;
 
         let oldList = this.state.highScores;
-        let newList = oldList.map((highscore, index) => <li key={highscore + "" + index}>{highscore.userName}</li>);
+        let newList = oldList.map((highscore, index) => <li key={highscore + ":" + index}>{highscore.userName}</li>);
 
         return <table className="table">
                 <thead>

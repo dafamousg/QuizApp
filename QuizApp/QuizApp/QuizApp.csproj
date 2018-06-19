@@ -21,13 +21,6 @@
     <Content Remove="ClientApp\**" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Compile Remove="Migrations\20180618184231_questions.cs" />
-    <Compile Remove="Migrations\20180618184231_questions.Designer.cs" />
-    <Compile Remove="Migrations\20180618185827_ss.cs" />
-    <Compile Remove="Migrations\20180618185827_ss.Designer.cs" />
-  </ItemGroup>
-
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
