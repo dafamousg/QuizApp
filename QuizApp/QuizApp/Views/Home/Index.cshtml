@@ -1,8 +1,11 @@
-@{
-    ViewData["Title"] = "Home Page";
-}
+@using Microsoft.AspNetCore.Identity
+@using QuizApp.Models;
 
-<div id="react-app">Loading...</div>
+@inject UserManager<User> UserManager
+
+<div id="react-app">
+    @ViewData["name"]
+</div>
 
 @section scripts {
     <script src="~/dist/main.js" asp-append-version="true"></script>

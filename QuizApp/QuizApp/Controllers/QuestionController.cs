@@ -22,7 +22,7 @@ namespace QuizApp.Controllers
             userManager = user;
         }
 
-        [Route("GetQuestions")]
+        [Route("api/GetQuestions")]
         public IEnumerable<Question> GetQuestions()
         {
             var questions = quizContext.Questions;
@@ -60,7 +60,8 @@ namespace QuizApp.Controllers
 
         public string ReceiveScore(int score, string userName)
         {
-            var user = quizContext.Users.Where(x => x.Email == userName).FirstOrDefault();
+            userName = userName.Trim();
+            var user = quizContext.User.Where(x => x.Email == userName).FirstOrDefault();
             
             if (user == null)
             {
@@ -72,7 +73,7 @@ namespace QuizApp.Controllers
                 Result = score,
 
                 User = user,
-                UserId = quizContext.Users.Where(u => u.Email == userName).Single().Id,
+                UserId = quizContext.User.Where(u => u.Email == userName).Single().Id,
                 UserName = userName,
                 DateTime = DateTime.Now.ToString()
             };
