@@ -74,7 +74,7 @@ namespace QuizApp.Controllers
                 Result = score,
 
                 User = user,
-                UserId = quizContext.User.Where(u => u.Email == userName).Single().Id,
+                UserId = quizContext.Users.Where(u => u.Email == userName).Single().Id,
                 UserName = userName,
                 DateTime = DateTime.Now.ToString()
             };
