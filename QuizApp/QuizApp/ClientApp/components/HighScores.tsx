@@ -2,12 +2,11 @@ import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Quiz } from './Quiz';
 
-
 interface IHighscoreState {
     highScores: HighScore[];
 }
 
-export class HighScores extends React.Component<RouteComponentProps<{}>, IHighscoreState>{
+export class Highscore extends React.Component<RouteComponentProps<{}>, IHighscoreState>{
 
     public constructor() {
         super(); {
@@ -26,16 +25,16 @@ export class HighScores extends React.Component<RouteComponentProps<{}>, IHighsc
         return <table className="table">
             <thead>
                 <tr>
+                    <th>Player</th>
                     <th>HighScore</th>
-                    <th>Username</th>
-                    <th>Date & Time</th>
+                    <th>When</th>
                 </tr>
             </thead>
             <tbody>
                 {oldList.map((highscore, index) =>
                     <tr key={highscore.userName + ":" + index}>
-                        <td>{highscore._HighScore}</td>
                         <td>{highscore.userName}</td>
+                        <td>{highscore._HighScore}</td>
                         <td>{highscore.dateTime}</td>
                     </tr>
                 )}
@@ -44,9 +43,9 @@ export class HighScores extends React.Component<RouteComponentProps<{}>, IHighsc
     }
 
     fetchScores() {
-        // fråga API:et efter aktuell data
+        // Hämtar aktuell data från apin
 
-        fetch('/question/GetHighScores')
+        fetch('/question/GetScores')
             .then(data => {
                 console.log('highscore returned ', data);
                 return data.json();
@@ -71,3 +70,4 @@ interface HighScore {
     userName: string;
     dateTime: string;
 }
+//highscore

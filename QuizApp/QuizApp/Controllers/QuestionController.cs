@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,15 +22,14 @@ namespace QuizApp.Controllers
             quizContext = context;
             userManager = user;
         }
+
         [Route("api/GetQuestions")]
         public IEnumerable<QuestionOption> GetQuestions()
         {
-
             var questions = quizContext.QuestionOptions;
 
             return questions;
         }
-
 
         public JsonResult AddQuestion(QuestionOption newQuestion)
         {
@@ -40,7 +40,6 @@ namespace QuizApp.Controllers
                 Option2 = newQuestion.Option2,
                 Option3 = newQuestion.Option3,
                 CorrectAnswer = newQuestion.CorrectAnswer
-
             };
 
             quizContext.QuestionOptions.Add(question);
@@ -48,7 +47,6 @@ namespace QuizApp.Controllers
 
             return Json(newQuestion);
         }
-
 
         public IEnumerable<HighScore> GetHighScores()
         {
@@ -62,35 +60,24 @@ namespace QuizApp.Controllers
             return topScoreByPlayer;
         }
 
-
-
-
-
         public string ReceiveScore(int score, string userName)
         {
-            userName = userName.Trim();
+            userName = userName.Replace("    ", "");
             var user = quizContext.User.Where(x => x.Email == userName).FirstOrDefault();
-
-
 
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with name '{userName}'.");
+                throw new ApplicationException($"Unable to find user '{userName}'.");
             }
 
             HighScore score1 = new HighScore()
             {
                 _HighScore = score,
-
                 User = user,
                 UserId = quizContext.Users.Where(u => u.Email == userName).Single().Id,
                 UserName = userName,
                 DateTime = DateTime.Now.ToString()
-
             };
-
-
-
 
             quizContext.HighScores.Add(score1);
             quizContext.SaveChanges();
@@ -98,7 +85,6 @@ namespace QuizApp.Controllers
             return score.ToString();
         }
 
-
-
     }
 }
+/*question controller*/
