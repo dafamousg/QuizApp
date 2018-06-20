@@ -6,7 +6,7 @@ interface IHighscoreState {
     highScores: HighScore[];
 }
 
-export class Highscore extends React.Component<RouteComponentProps<{}>, IHighscoreState>{
+export class HighScores extends React.Component<RouteComponentProps<{}>, IHighscoreState>{
 
     public constructor() {
         super(); {
@@ -45,7 +45,7 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
     fetchScores() {
         // Hämtar aktuell data från apin
 
-        fetch('/question/GetScores')
+        fetch('/question/GetHighScores')
             .then(data => {
                 console.log('highscore returned ', data);
                 return data.json();

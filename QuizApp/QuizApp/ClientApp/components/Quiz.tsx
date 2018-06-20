@@ -122,7 +122,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
     sendScore() {
         console.log('Sending score for user: ' + userName + ' score: ' + this.state.score);
         fetch('/Question/ReceiveScore?score=' + this.state.score + '&userName=' + userName)
-            .then(Response => console.log('Fetch status: ' + Response.status));
+            .then(Response => console.log('Fetch response time: ' + Response.status));
     }
 
     getQuestion() {
