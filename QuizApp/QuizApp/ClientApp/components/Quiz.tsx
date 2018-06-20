@@ -56,10 +56,10 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
 
             let oldList = this.state.questions;
 
-            let question_ = oldList.map(x => x.question_);
-            let optionA = oldList.map(o => o.optionA);
-            let optionB = oldList.map(o => o.optionB);
-            let optionC = oldList.map(o => o.optionC);
+            let question = oldList.map(x => x.question);
+            let option1 = oldList.map(o => o.option1);
+            let option2 = oldList.map(o => o.option2);
+            let option3 = oldList.map(o => o.option3);
 
             let counter = this.state.counter;
 
@@ -73,18 +73,18 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
             else {
                 return (
                     <div className="row">
-                        <h2 id="Quiz_question">{question_[counter]}</h2>
+                        <h2>{question[counter]}</h2>
                         <br />
-                            <label className="container">{optionA[counter]}
-                                <td><input type="radio" name="q1" value={optionA[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionA[counter]} disabled={this.state.isOptionDisabled} /></td>
+                            <label className="container">{option1[counter]}
+                                <td><input type="radio" name="q1" value={option1[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option1[counter]} disabled={this.state.isOptionDisabled} /></td>
                             </label>
                         <br/>
-                            <label className="container">{optionB[counter]}
-                                <td><input type="radio" name="q1" value={optionB[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionB[counter]} disabled={this.state.isOptionDisabled} /></td>
+                            <label className="container">{option2[counter]}
+                                <td><input type="radio" name="q1" value={option2[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option2[counter]} disabled={this.state.isOptionDisabled} /></td>
                             </label>
                         <br/>
-                            <label className="container">{optionC[counter]}
-                                <td><input type="radio" name="q1" value={optionC[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionC[counter]} disabled={this.state.isOptionDisabled} /></td>
+                            <label className="container">{option3[counter]}
+                                <td><input type="radio" name="q1" value={option3[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option3[counter]} disabled={this.state.isOptionDisabled} /></td>
                             </label>
                         <hr />
                         <div>
@@ -119,9 +119,9 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
     }
 
     sendScore() {
-        console.log('/Question_/ReceiveScore?score=' + this.state.score + '&userName=' + userName);
-        fetch('/Question_/ReceiveScore?score=' + this.state.score + '&userName' + userName)
-            .then(Response => console.log('fetch status: ' + Response.status));
+        console.log('/Question/ReceiveScore?score=' + this.state.score + '&userName=' + userName);
+        fetch('/Question/ReceiveScore?score=' + this.state.score + '&userName=' + userName)
+            .then(Response => console.log('fetch status: ', Response.status));
     }
 
     getQuestion() {
@@ -186,9 +186,9 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
 }
 
 interface Quest {
-    question_: string;
+    question: string;
     correctAnswer: string;
-    optionA: string;
-    optionB: string;
-    optionC: string;
+    option1: string;
+    option2: string;
+    option3: string;
 }

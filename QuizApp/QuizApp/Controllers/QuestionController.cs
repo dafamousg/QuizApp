@@ -23,38 +23,38 @@ namespace QuizApp.Controllers
         }
 
         [Route("api/GetQuestions")]
-        public IEnumerable<Question> GetQuestions()
+        public IEnumerable<QuestionOption> GetQuestions()
         {
-            var questions = quizContext.Questions;
+            var questions = quizContext.QuestionOptions;
 
             return questions;
         }
 
-        public JsonResult AddQuestions(Question newQuestion)
+        public JsonResult AddQuestions(QuestionOption newQuestion)
         {
-            Question question = new Question()
+            QuestionOption question = new QuestionOption()
             {
-                Question_ = newQuestion.Question_,
-                OptionA = newQuestion.OptionA,
-                OptionB = newQuestion.OptionB,
-                OptionC = newQuestion.OptionC,
+                Question = newQuestion.Question,
+                Option1 = newQuestion.Option1,
+                Option2 = newQuestion.Option2,
+                Option3 = newQuestion.Option3,
                 CorrectAnswer = newQuestion.CorrectAnswer
             };
 
-            quizContext.Questions.Add(question);
+            quizContext.QuestionOptions.Add(question);
             quizContext.SaveChanges();
 
-            return Json(question);
+            return Json(newQuestion);
         }
 
-        public IEnumerable<Score> GetScores()
+        public IEnumerable<HighScore> GetScores()
         {
 
-            var result = quizContext.Scores;
+            var result = quizContext.HighScores;
 
-            var topScoreByPlayer = quizContext.Scores.GroupBy(x => x.UserId)
-                 .Select(x => x.OrderByDescending(y => y.Result).First())
-                 .OrderByDescending(x => x.Result).ThenByDescending(d => d.DateTime);
+            var topScoreByPlayer = quizContext.HighScores.GroupBy(x => x.UserId)
+                 .Select(x => x.OrderByDescending(y => y._HighScore).First())
+                 .OrderByDescending(x => x._HighScore).ThenByDescending(d => d.DateTime);
 
             return topScoreByPlayer;
         }
@@ -69,9 +69,9 @@ namespace QuizApp.Controllers
                 throw new ApplicationException($"Unable to load user with name '{userName}'.");
             }
 
-            Score scores = new Score()
+            HighScore scores = new HighScore()
             {
-                Result = score,
+                _HighScore = score,
 
                 User = user,
                 UserId = quizContext.Users.Where(u => u.Email == userName).Single().Id,
@@ -79,7 +79,7 @@ namespace QuizApp.Controllers
                 DateTime = DateTime.Now.ToString()
             };
             
-            quizContext.Scores.Add(scores);
+            quizContext.HighScores.Add(scores);
             quizContext.SaveChanges();
 
             return score.ToString();

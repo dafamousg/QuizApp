@@ -2,7 +2,7 @@
 import { RouteComponentProps } from 'react-router';
 
 
-export class Questions extends React.Component<RouteComponentProps<{}>>{
+export class CreateQuestion extends React.Component<RouteComponentProps<{}>>{
 
     public constructor() {
         super(); {}
@@ -18,15 +18,15 @@ export class Questions extends React.Component<RouteComponentProps<{}>>{
                 </div>
                 <div className="form-group col-xs-7">
                     <label>Option 1:</label>
-                    <input id="OptionA" name="OptionA" type="text" className="form-control" />
+                    <input id="Option1" name="Option1" type="text" className="form-control" />
                 </div>
                 <div className="form-group col-xs-7">
                     <label>Option 2:</label>
-                    <input id="OptionB" name="OptionB" type="text" className="form-control" />
+                    <input id="Option2" name="Option2" type="text" className="form-control" />
                 </div>
                 <div className="form-group col-xs-7">
                     <label>Option 3:</label>
-                    <input id="OptionC" name="OptionC" type="text" className="form-control" />
+                    <input id="Option3" name="Option3" type="text" className="form-control" />
                 </div>
                 <div className="form-group col-xs-7">
                     <label>Correct answer:</label>
