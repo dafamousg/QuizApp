@@ -21,16 +21,17 @@ namespace QuizApp.Controllers
             quizContext = context;
             userManager = user;
         }
-
         [Route("api/GetQuestions")]
         public IEnumerable<QuestionOption> GetQuestions()
         {
+
             var questions = quizContext.QuestionOptions;
 
             return questions;
         }
 
-        public JsonResult AddQuestions(QuestionOption newQuestion)
+
+        public JsonResult AddQuestion(QuestionOption newQuestion)
         {
             QuestionOption question = new QuestionOption()
             {
@@ -39,6 +40,7 @@ namespace QuizApp.Controllers
                 Option2 = newQuestion.Option2,
                 Option3 = newQuestion.Option3,
                 CorrectAnswer = newQuestion.CorrectAnswer
+
             };
 
             quizContext.QuestionOptions.Add(question);
@@ -47,7 +49,8 @@ namespace QuizApp.Controllers
             return Json(newQuestion);
         }
 
-        public IEnumerable<HighScore> GetScores()
+
+        public IEnumerable<HighScore> GetHighScores()
         {
 
             var result = quizContext.HighScores;
@@ -59,17 +62,23 @@ namespace QuizApp.Controllers
             return topScoreByPlayer;
         }
 
+
+
+
+
         public string ReceiveScore(int score, string userName)
         {
             userName = userName.Trim();
             var user = quizContext.User.Where(x => x.Email == userName).FirstOrDefault();
-            
+
+
+
             if (user == null)
             {
                 throw new ApplicationException($"Unable to load user with name '{userName}'.");
             }
 
-            HighScore scores = new HighScore()
+            HighScore score1 = new HighScore()
             {
                 _HighScore = score,
 
@@ -77,13 +86,19 @@ namespace QuizApp.Controllers
                 UserId = quizContext.Users.Where(u => u.Email == userName).Single().Id,
                 UserName = userName,
                 DateTime = DateTime.Now.ToString()
+
             };
-            
-            quizContext.HighScores.Add(scores);
+
+
+
+
+            quizContext.HighScores.Add(score1);
             quizContext.SaveChanges();
 
             return score.ToString();
         }
+
+
 
     }
 }

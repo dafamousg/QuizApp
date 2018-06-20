@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Data
 {
-    public class DbInitializer
+    public static class DbInitializer
     {
         public static void Initializer(QuizContext context)
         {
@@ -32,7 +32,6 @@ namespace QuizApp.Data
             }
 
             context.SaveChanges();
-
         }
     }
 }

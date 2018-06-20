@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using QuizApp.Data;
+using QuizApp.Models;
 
 namespace QuizApp
 {

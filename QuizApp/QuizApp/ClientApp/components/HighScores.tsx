@@ -1,12 +1,13 @@
-﻿import * as React from 'react';
+import * as React from 'react';
 import { RouteComponentProps } from 'react-router';
 import { Quiz } from './Quiz';
+
 
 interface IHighscoreState {
     highScores: HighScore[];
 }
 
-export class Highscore extends React.Component<RouteComponentProps<{}>, IHighscoreState>{
+export class HighScores extends React.Component<RouteComponentProps<{}>, IHighscoreState>{
 
     public constructor() {
         super(); {
@@ -23,29 +24,29 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
         let newList = oldList.map((highscore, index) => <li key={highscore + ":" + index}>{highscore.userName}</li>);
 
         return <table className="table">
-                <thead>
-                    <tr>
-                        <th>HighScore</th>
-                        <th>Username</th>
-                        <th>Date & Time</th>
+            <thead>
+                <tr>
+                    <th>HighScore</th>
+                    <th>Username</th>
+                    <th>Date & Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {oldList.map((highscore, index) =>
+                    <tr key={highscore.userName + ":" + index}>
+                        <td>{highscore._HighScore}</td>
+                        <td>{highscore.userName}</td>
+                        <td>{highscore.dateTime}</td>
                     </tr>
-                </thead>
-                <tbody>
-                    {oldList.map((highscore, index) =>
-                        <tr key={highscore.userName + ":" + index}>
-                            <td>{highscore._HighScore}</td>
-                            <td>{highscore.userName}</td>
-                            <td>{highscore.dateTime}</td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
+                )}
+            </tbody>
+        </table>
     }
 
     fetchScores() {
-        // fråga API:et efter aktuell data
+        // fr�ga API:et efter aktuell data
 
-        fetch('/question/GetScores')
+        fetch('/question/GetHighScores')
             .then(data => {
                 console.log('highscore returned ', data);
                 return data.json();

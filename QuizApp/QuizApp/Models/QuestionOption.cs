@@ -7,6 +7,7 @@ namespace QuizApp.Models
 {
     public class QuestionOption : BaseEntity
     {
+        public QuestionOption() { }
         public string Question { get; set; }
         public string Option1 {get;set;}
         public string Option2 {get;set;}
