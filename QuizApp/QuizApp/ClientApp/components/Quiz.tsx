@@ -21,7 +21,16 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
     public constructor(props: IQuizProps) {
         super(props); {
             this.state = {
-                questions: [], selectedOption: "", isSubmitButtonDisabled: true, isNextQuestionButtonDisabled: true, isOptionDisabled: false, counter: 0, score: 0, startQuiz: false, answerColor: 'orange', showAnswer: ""
+                questions: [],
+                selectedOption: '',
+                isSubmitButtonDisabled: true,
+                isNextQuestionButtonDisabled: true,
+                isOptionDisabled: false,
+                counter: 0,
+                score: 0,
+                startQuiz: false,
+                answerColor: 'orange',
+                showAnswer: ''
             }
         }
 
@@ -63,27 +72,19 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
             else {
                 return (
                     <div className="row">
-
-                        <form>
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>A</th>
-                                        <th>B</th>
-                                        <th>C</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>{question_[counter]}</td>
-                                        <td><input type="radio" name="q1" value={optionA[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionA[counter]} disabled={this.state.isOptionDisabled} /></td>
-                                        <td><input type="radio" name="q1" value={optionB[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionB[counter]} disabled={this.state.isOptionDisabled} /></td>
-                                        <td><input type="radio" name="q1" value={optionC[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionC[counter]} disabled={this.state.isOptionDisabled} /></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </form>
+                        <h2 id="Quiz_question">{question_[counter]}</h2>
+                        <br />
+                            <label className="container">{optionA[counter]}
+                                <td><input type="radio" name="q1" value={optionA[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionA[counter]} disabled={this.state.isOptionDisabled} /></td>
+                            </label>
+                        <br/>
+                            <label className="container">{optionB[counter]}
+                                <td><input type="radio" name="q1" value={optionB[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionB[counter]} disabled={this.state.isOptionDisabled} /></td>
+                            </label>
+                        <br/>
+                            <label className="container">{optionC[counter]}
+                                <td><input type="radio" name="q1" value={optionC[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === optionC[counter]} disabled={this.state.isOptionDisabled} /></td>
+                            </label>
                         <hr />
                         <div>
                             <input type="button" value="Submit" className="btn btn-default" style={{ marginRight: 10 }} disabled={this.state.isSubmitButtonDisabled} onClick={this.SubmitEvent}></input>
@@ -99,13 +100,13 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
     }
 
     changeEvent(event: any) {
-
+        console.log("Change event started");
         this.setState({ selectedOption: event.target.value })
+        console.log("Change event finished");
         this.setState({ isSubmitButtonDisabled: false })
     }
 
     restartQuiz() {
-
         this.setState({ startQuiz: true })
         this.setState({ counter: 0 })
         this.setState({ score: 0 })
