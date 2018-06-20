@@ -12,8 +12,8 @@ using System;
 namespace QuizApp.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20180620213920_my_migration")]
-    partial class my_migration
+    [Migration("20180620215558_my_migration2")]
+    partial class my_migration2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

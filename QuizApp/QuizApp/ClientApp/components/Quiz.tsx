@@ -68,32 +68,29 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
 
                 let maximumScore = this.state.questions.length;
                 this.sendScore();
-                return < div className="text-center"><h1>You answered {this.state.score} of {this.state.questions.length} questions correct. Do you want to play again?</h1><button id="startQuizButton" className="submitBtn" onClick={this.restartQuiz}>Restart Quiz</button></div>
+                return < div className="text-center btn btn-default"><h1>You answered {this.state.score} of {this.state.questions.length} questions correct. Do you want to play again?</h1><button id="startQuizButton" className="submitBtn" onClick={this.restartQuiz}>Restart Quiz</button></div>
 
             }
             else {
                 return (
                     <div className="row">
-                        <h2>{question[counter]}</h2>
-                        <br />
-                        <label className="container">{option1[counter]}
-                            <td><input type="radio" name="q1" value={option1[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option1[counter]} disabled={this.state.isOptionDisabled} /></td>
-                        </label>
-                        <br />
-                        <label className="container">{option2[counter]}
-                            <td><input type="radio" name="q1" value={option2[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option2[counter]} disabled={this.state.isOptionDisabled} /></td>
-                        </label>
-                        <br />
-                        <label className="container">{option3[counter]}
-                            <td><input type="radio" name="q1" value={option3[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option3[counter]} disabled={this.state.isOptionDisabled} /></td>
-                        </label>
+                        <h2 style={{ marginLeft: 5 }}>{question[counter]}</h2>
+                        <hr />
+                        <h4>
+                            <p><input style={{ marginLeft: 10 }} type="radio" name="q1" value={option1[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option1[counter]} disabled={this.state.isOptionDisabled} /> {option1[counter]}</p>
+
+                            <p><input style={{ marginLeft: 10 }} type="radio" name="q1" value={option2[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option2[counter]} disabled={this.state.isOptionDisabled} /> {option2[counter]}</p>
+
+                            <p><input style={{ marginLeft: 10 }} type="radio" name="q1" value={option3[counter]} onChange={this.changeEvent} checked={this.state.selectedOption === option3[counter]} disabled={this.state.isOptionDisabled} /> {option3[counter]}</p>
+                        </h4>
+
                         <hr />
                         <div className="row col-md-5">
-                            <input type="button" value="Submit" className="btn btn-default" style={{ marginRight: 10 }} disabled={this.state.isSubmitButtonDisabled} onClick={this.SubmitEvent}></input>
-                            <input type="button" value="Next question" id="nextQuestionButton" className="btn btn-default" disabled={this.state.isNextQuestionButtonDisabled} onClick={this.manageNextQuestion}></input>
+                            <input type="button" value="Submit" className="btn btn-danger" style={{ marginRight: 10, marginLeft: 5 }} disabled={this.state.isSubmitButtonDisabled} onClick={this.SubmitEvent}></input>
+                            <input type="button" value="Next question" id="nextQuestionButton" className="btn btn-primary" disabled={this.state.isNextQuestionButtonDisabled} onClick={this.manageNextQuestion}></input>
 
                             <label className="pull-right" id="points">{this.state.score} of {this.state.questions.length} correct</label>
-                            <label id="answerBox" style={{ color: this.state.answerColor, marginLeft: 10 }}>{this.state.showAnswer}</label>
+                            <p><label id="answerBox" style={{ color: this.state.answerColor, marginLeft: 10 }}>{this.state.showAnswer}</label></p>
                         </div>
                     </div>
                 );

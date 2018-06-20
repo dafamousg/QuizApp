@@ -5,7 +5,7 @@ import { RouteComponentProps } from 'react-router';
 export class CreateQuestion extends React.Component<RouteComponentProps<{}>>{
 
     public constructor() {
-        super(); {}
+        super(); { }
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     public render() {
@@ -32,7 +32,7 @@ export class CreateQuestion extends React.Component<RouteComponentProps<{}>>{
                     <label>Correct answer:</label>
                     <input id="CorrectAnswer" name="CorrectAnswer" type="text" className="form-control" />
                     <br />
-                    <button type="submit" className="submitBtn">Submit</button>
+                    <button type="submit" className="btn btn-default">Submit</button>
                 </div>
             </form>
         </div>;

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace QuizApp.Migrations
 {
-    public partial class my_migration : Migration
+    public partial class my_migration2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
