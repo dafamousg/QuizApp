@@ -7,6 +7,7 @@ namespace QuizApp.Models
 {
     public class HighScore :BaseEntity
     {
+        public HighScore() { }
         public int _HighScore { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
