@@ -33,8 +33,8 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
                 <tbody>
                     {oldList.map((highscore, index) =>
                         <tr key={highscore.userName + ":" + index}>
-                            <td>{highscore.userName}</td>
                             <td>{highscore._HighScore}</td>
+                            <td>{highscore.userName}</td>
                             <td>{highscore.dateTime}</td>
                         </tr>
                     )}
@@ -45,9 +45,9 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
     fetchScores() {
         // fråga API:et efter aktuell data
 
-        fetch('/question/GetHighScores')
+        fetch('/question/GetScores')
             .then(data => {
-                console.log('Question returned ', data);
+                console.log('highscore returned ', data);
                 return data.json();
             })
             .then(obj => {
@@ -57,7 +57,7 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
                 });
             })
             .catch(message => {
-                console.log('något gick fel: ' + message);
+                console.log('something went wrong: ' + message);
             })
     }
     componentDidMount() {

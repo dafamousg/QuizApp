@@ -22,15 +22,15 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
         super(props); {
             this.state = {
                 questions: [],
-                selectedOption: '',
+                selectedOption: "",
                 isSubmitButtonDisabled: true,
                 isNextQuestionButtonDisabled: true,
                 isOptionDisabled: false,
                 counter: 0,
                 score: 0,
                 startQuiz: false,
-                answerColor: 'orange',
-                showAnswer: ''
+                answerColor: "orange",
+                showAnswer: ""
             }
         }
 
@@ -40,6 +40,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
         this.sendScore = this.sendScore.bind(this);
         this.startQuiz = this.startQuiz.bind(this);
         this.restartQuiz = this.restartQuiz.bind(this);
+        this.changeEvent = this.changeEvent.bind(this);
     }
 
     public render() {
@@ -100,9 +101,7 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
     }
 
     changeEvent(event: any) {
-        console.log("Change event started");
         this.setState({ selectedOption: event.target.value })
-        console.log("Change event finished");
         this.setState({ isSubmitButtonDisabled: false })
     }
 
@@ -120,8 +119,8 @@ export class Quiz extends React.Component<IQuizProps, IQuizState>{
     }
 
     sendScore() {
-        console.log('/Question/ReceiveScore?score=' + this.state.score + '&userName=' + userName);
-        fetch('/Question/ReceiveScore?score=' + this.state.score + '&userName' + userName)
+        console.log('/Question_/ReceiveScore?score=' + this.state.score + '&userName=' + userName);
+        fetch('/Question_/ReceiveScore?score=' + this.state.score + '&userName' + userName)
             .then(Response => console.log('fetch status: ' + Response.status));
     }
 
