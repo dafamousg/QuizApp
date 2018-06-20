@@ -43,6 +43,7 @@ namespace QuizApp.Controllers
 
             quizContext.Questions.Add(question);
             quizContext.SaveChanges();
+
             return Json(question);
         }
 

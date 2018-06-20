@@ -4,10 +4,7 @@ import { Quiz } from './Quiz';
 
 interface IHighscoreState {
     highScores: HighScore[];
-
 }
-
-
 
 export class Highscore extends React.Component<RouteComponentProps<{}>, IHighscoreState>{
 
@@ -45,10 +42,8 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
             </table>
     }
 
-
     fetchScores() {
         // fråga API:et efter aktuell data
-
 
         fetch('/question/GetHighScores')
             .then(data => {
@@ -69,8 +64,6 @@ export class Highscore extends React.Component<RouteComponentProps<{}>, IHighsco
         this.fetchScores();
     }
 }
-
-
 
 interface HighScore {
     _HighScore: number;
