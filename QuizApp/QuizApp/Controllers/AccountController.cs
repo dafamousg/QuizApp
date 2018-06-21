@@ -10,7 +10,7 @@ using QuizApp.Data;
 using QuizApp.Models;
 using QuizApp.Models.ViewModels;
 
-namespace quizlabb.Controllers
+namespace QuizApp.Controllers
 {
 
     public class AccountController : Controller
@@ -102,7 +102,7 @@ namespace quizlabb.Controllers
                     _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-        
+
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation("User created a new account with password.");

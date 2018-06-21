@@ -5,11 +5,10 @@ using System.Threading.Tasks;
 
 namespace QuizApp.Models
 {
-    public class Score : BaseEntity
+    public class HighScore :BaseEntity
     {
-        public Score() { }
-
-        public int Result { get; set; }
+        public HighScore() { }
+        public int _HighScore { get; set; }
         public string UserId { get; set; }
         public string UserName { get; set; }
         public User User { get; set; }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace QuizApp.Migrations
 {
-    public partial class start : Migration
+    public partial class my_migration2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -50,19 +50,19 @@ namespace QuizApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Questions",
+                name: "QuestionOptions",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     CorrectAnswer = table.Column<string>(nullable: true),
-                    OptionA = table.Column<string>(nullable: true),
-                    OptionB = table.Column<string>(nullable: true),
-                    OptionC = table.Column<string>(nullable: true),
-                    Question_ = table.Column<string>(nullable: true)
+                    Option1 = table.Column<string>(nullable: true),
+                    Option2 = table.Column<string>(nullable: true),
+                    Option3 = table.Column<string>(nullable: true),
+                    Question = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Questions", x => x.Id);
+                    table.PrimaryKey("PK_QuestionOptions", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -172,20 +172,20 @@ namespace QuizApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Scores",
+                name: "HighScores",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     DateTime = table.Column<string>(nullable: true),
-                    Result = table.Column<int>(nullable: false),
                     UserId = table.Column<string>(nullable: true),
-                    UserName = table.Column<string>(nullable: true)
+                    UserName = table.Column<string>(nullable: true),
+                    _HighScore = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Scores", x => x.Id);
+                    table.PrimaryKey("PK_HighScores", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Scores_AspNetUsers_UserId",
+                        name: "FK_HighScores_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
@@ -232,8 +232,8 @@ namespace QuizApp.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Scores_UserId",
-                table: "Scores",
+                name: "IX_HighScores_UserId",
+                table: "HighScores",
                 column: "UserId");
         }
 
@@ -255,10 +255,10 @@ namespace QuizApp.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "Questions");
+                name: "HighScores");
 
             migrationBuilder.DropTable(
-                name: "Scores");
+                name: "QuestionOptions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

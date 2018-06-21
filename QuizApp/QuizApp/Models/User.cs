@@ -8,7 +8,6 @@ namespace QuizApp.Models
 {
     public class User : IdentityUser
     {
-        public User() { }
-        public List<Score> Scores { get; set; }
+        public List<HighScore> Scores { get; set; }
     }
 }

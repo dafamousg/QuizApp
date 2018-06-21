@@ -12,8 +12,8 @@ using System;
 namespace QuizApp.Migrations
 {
     [DbContext(typeof(QuizContext))]
-    [Migration("20180610150203_start")]
-    partial class start
+    [Migration("20180620215558_my_migration2")]
+    partial class my_migration2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -186,44 +186,44 @@ namespace QuizApp.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Question", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("CorrectAnswer");
-
-                    b.Property<string>("OptionA");
-
-                    b.Property<string>("OptionB");
-
-                    b.Property<string>("OptionC");
-
-                    b.Property<string>("Question_");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Questions");
-                });
-
-            modelBuilder.Entity("QuizApp.Models.Score", b =>
+            modelBuilder.Entity("QuizApp.Models.HighScore", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("DateTime");
 
-                    b.Property<int>("Result");
-
                     b.Property<string>("UserId");
 
                     b.Property<string>("UserName");
+
+                    b.Property<int>("_HighScore");
 
                     b.HasKey("Id");
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Scores");
+                    b.ToTable("HighScores");
+                });
+
+            modelBuilder.Entity("QuizApp.Models.QuestionOption", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CorrectAnswer");
+
+                    b.Property<string>("Option1");
+
+                    b.Property<string>("Option2");
+
+                    b.Property<string>("Option3");
+
+                    b.Property<string>("Question");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("QuestionOptions");
                 });
 
             modelBuilder.Entity("QuizApp.Models.User", b =>
@@ -281,7 +281,7 @@ namespace QuizApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("QuizApp.Models.Score", b =>
+            modelBuilder.Entity("QuizApp.Models.HighScore", b =>
                 {
                     b.HasOne("QuizApp.Models.User", "User")
                         .WithMany("Scores")
